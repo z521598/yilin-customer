@@ -9,6 +9,8 @@ import com.yl.model.Customer;
 import com.yl.run.Main;
 import com.yl.view.CureStateFrame;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -20,6 +22,7 @@ import java.util.List;
  * Created by Administrator on 2018/5/17.
  */
 public class QueryListener implements ActionListener {
+    private Logger log = LoggerFactory.getLogger(QueryListener.class);
     private Dao<Customer, Long> customerDao = DBUtils.getCustomerDao();
     private Dao<CureState, Long> cureStateDao = DBUtils.getCureStateDao();
 
@@ -31,8 +34,8 @@ public class QueryListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent ae) {
+        String str = queryTextField.getText().trim();
         try {
-            String str = queryTextField.getText().trim();
             if (StringUtils.isBlank(str)) {
                 Main.customerFrame.refreshCustomerTable();
                 return;
@@ -63,8 +66,10 @@ public class QueryListener implements ActionListener {
             }
 
         } catch (SQLException se) {
+            log.error("query {} failed", str, se);
             JOptionPane.showMessageDialog(null, "查询失败", "初始化失败", JOptionPane.ERROR_MESSAGE);
         } catch (Exception e) {
+            log.error("query {} failed", str, e);
             JOptionPane.showMessageDialog(null, "未知原因，查询失败", "初始化失败", JOptionPane.ERROR_MESSAGE);
         }
 

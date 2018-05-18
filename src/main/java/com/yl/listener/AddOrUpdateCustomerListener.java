@@ -5,6 +5,8 @@ import com.yl.common.exception.DataFormatException;
 import com.yl.model.Customer;
 import com.yl.run.Main;
 import com.yl.view.CustomerAorUFrame;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,6 +17,8 @@ import java.awt.event.ActionListener;
  * Created by Administrator on 2018/5/17.
  */
 public class AddOrUpdateCustomerListener implements ActionListener {
+
+    private Logger log = LoggerFactory.getLogger(AddOrUpdateCustomerListener.class);
 
     private CustomerAorUFrame customerAorUFrame;
 
@@ -34,7 +38,7 @@ public class AddOrUpdateCustomerListener implements ActionListener {
             Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(null, dfe.getMessage(), "操作失败", JOptionPane.ERROR_MESSAGE);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("add Customer failed:", e);
             Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(null, "请检查数据是否合法", "操作失败", JOptionPane.ERROR_MESSAGE);
         }
