@@ -176,7 +176,7 @@ public class CustomerAorUFrame extends JFrame {
             customer.setHeight(Integer.parseInt(heightStr.trim()));
         }
         String weightStr = weightField.getText();
-        if (StringUtils.isNotBlank(heightStr)) {
+        if (StringUtils.isNotBlank(weightStr)) {
             customer.setWeight(Integer.parseInt(weightStr.trim()));
         }
         String phoneNumber = phoneNumberField.getText();

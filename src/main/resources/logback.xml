@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <property name="logStoreDirectory" value="./log"/>
+    <property name="logStoreDirectory" value="."/>
     <!-- customer日志 -->
     <appender name="customerAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <File>${logStoreDirectory}/yl.log</File>
+        <File>${logStoreDirectory}\yl.log</File>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- rollover daily -->
-            <fileNamePattern>${logStoreDirectory}/history/%d{yyyy-MM-dd}.yl.%i.log</fileNamePattern>
+            <fileNamePattern>${logStoreDirectory}\history\%d{yyyy-MM-dd}.yl.%i.log</fileNamePattern>
             <maxHistory>20</maxHistory>
             <TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>50MB</maxFileSize>

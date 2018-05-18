@@ -15,9 +15,6 @@ import java.util.Date;
  */
 public class CureStateAorUFrame extends JFrame {
 
-    private JPanel titlePanel = new JPanel();
-    private JLabel titleLabel = new JLabel("添加治疗记录");
-
     private Long id;
     private Long customerId;
 
@@ -59,9 +56,6 @@ public class CureStateAorUFrame extends JFrame {
         // customerId
         customerId = cureState.getCustomerId();
 
-        // 标题
-        titlePanel.add(titleLabel);
-        add(titlePanel);
 
         // 症状
         symptomField.setText(DataUtils.toString(cureState.getSymptom()));
@@ -100,7 +94,7 @@ public class CureStateAorUFrame extends JFrame {
         confrimButton.addActionListener(new AddOrUpdateCureStateListener(this, cureStateFrame));
         operationPanel.add(confrimButton);
         add(operationPanel);
-        setTitle("添加诊疗记录");
+        setTitle("添加或修改诊疗记录");
         pack();
         setLocationRelativeTo(null);
         setVisible(true);

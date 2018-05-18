@@ -17,6 +17,7 @@ public class Main {
     public static CustomerFrame customerFrame;
 
     public static void main(final String[] args) {
+        LOG.info("=======program begin========");
         String dbPath;
         // 初始化db
         if (args.length == 0) {
