@@ -24,8 +24,8 @@ public class CustomerAorUFrame extends JFrame {
     private JPanel sexPanel = new JPanel();
     private JLabel sexLabel = new JLabel("性别：");
     private ButtonGroup sexRadioButtonGroup = new ButtonGroup();
-    private JRadioButton sexManRadioButton = new JRadioButton("男", true);
-    private JRadioButton sexWomanRadioButton = new JRadioButton("女", false);
+    private JRadioButton sexManRadioButton = new JRadioButton("男");
+    private JRadioButton sexWomanRadioButton = new JRadioButton("女");
 
     private JPanel agePanel = new JPanel();
     private JLabel ageLabel = new JLabel("年龄：");
@@ -79,11 +79,13 @@ public class CustomerAorUFrame extends JFrame {
         add(namePanel);
 
         // 性别
-        if ("男".equals(customer.getSex())) {
-            sexManRadioButton.setSelected(true);
-        }
+//        if ("男".equals(customer.getSex())) {
+//
+//        }
         if ("女".equals(customer.getSex())) {
             sexWomanRadioButton.setSelected(true);
+        }else{
+            sexManRadioButton.setSelected(true);
         }
         sexPanel.add(sexLabel);
         sexRadioButtonGroup.add(sexManRadioButton);
