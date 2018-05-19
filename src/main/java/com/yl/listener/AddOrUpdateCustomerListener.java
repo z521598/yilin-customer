@@ -37,6 +37,9 @@ public class AddOrUpdateCustomerListener implements ActionListener {
         } catch (DataFormatException dfe) {
             Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(null, dfe.getMessage(), "操作失败", JOptionPane.ERROR_MESSAGE);
+        } catch (NumberFormatException ne) {
+            Toolkit.getDefaultToolkit().beep();
+            JOptionPane.showMessageDialog(null, "身高、体重或摄入卡路里必须为数字", "操作失败", JOptionPane.ERROR_MESSAGE);
         } catch (Exception e) {
             log.error("add Customer failed:", e);
             Toolkit.getDefaultToolkit().beep();

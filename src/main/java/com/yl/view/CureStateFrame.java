@@ -7,6 +7,8 @@ import com.yl.listener.CureStateMenuListener;
 import com.yl.listener.OpenAddCureStateListener;
 import com.yl.model.CureState;
 import com.yl.model.Customer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,6 +21,8 @@ import java.util.List;
  * Created by Administrator on 2018/4/23.
  */
 public class CureStateFrame extends JFrame {
+
+    private Logger log = LoggerFactory.getLogger(CureStateFrame.class);
 
     private JPanel customerPanel = new JPanel();
     private Long customerId;
@@ -131,7 +135,7 @@ public class CureStateFrame extends JFrame {
         add(customerPanel, BorderLayout.NORTH);
 
         // ===========================中间部分（治疗记录）====================================================
-        cureStateTable = new JTable(DataUtils.convertCureStateToArray(cureStateList), CureState.tableColumns){
+        cureStateTable = new JTable(DataUtils.convertCureStateToArray(cureStateList), CureState.tableColumns) {
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
@@ -155,11 +159,8 @@ public class CureStateFrame extends JFrame {
         setVisible(true);
     }
 
-    public void refreshCureStateTable() throws SQLException {
-        cureStatePanel.remove(cureStateJSroll);
-        cureStatePanel.setVisible(false);
-        List<CureState> cureStateList = DBUtils.queryCureState(customerId);
-        cureStateTable = new JTable(DataUtils.convertCureStateToArray(cureStateList), CureState.tableColumns){
+    public void updateCureStateTable(List<CureState> cureStateList) {
+        cureStateTable = new JTable(DataUtils.convertCureStateToArray(cureStateList), CureState.tableColumns) {
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
@@ -170,6 +171,25 @@ public class CureStateFrame extends JFrame {
         cureStateJSroll = new JScrollPane(cureStateTable);
         cureStatePanel.add(cureStateJSroll, BorderLayout.CENTER);
         cureStatePanel.setVisible(true);
+    }
+
+    public void refreshCureStateTable() {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    cureStatePanel.remove(cureStateJSroll);
+                    cureStatePanel.setVisible(false);
+                    List<CureState> cureStateList = DBUtils.queryCureState(customerId);
+                    updateCureStateTable(cureStateList);
+                } catch (SQLException e) {
+                    log.error("refreshCureStateTable failed:", e);
+                } catch (Exception e) {
+                    log.error("refreshCureStateTable failed:", e);
+                }
+            }
+        });
+
     }
 
 }

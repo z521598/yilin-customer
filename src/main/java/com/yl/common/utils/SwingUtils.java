@@ -42,5 +42,4 @@ public class SwingUtils {
                 KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0, true),
                 JComponent.WHEN_FOCUSED);
     }
-
 }

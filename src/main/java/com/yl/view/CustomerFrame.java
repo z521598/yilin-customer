@@ -6,9 +6,10 @@ import com.yl.common.utils.SwingUtils;
 import com.yl.listener.CustomerMenuListener;
 import com.yl.listener.QueryListener;
 import com.yl.model.Customer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,6 +21,8 @@ import java.util.List;
  * Created by Administrator on 2018/4/25.
  */
 public class CustomerFrame extends JFrame {
+
+    private Logger log = LoggerFactory.getLogger(CustomerFrame.class);
 
     private final static int PAGE_SIZE = 37;
     private int currentOffset = 0;
@@ -152,8 +155,21 @@ public class CustomerFrame extends JFrame {
         middlePanel.setVisible(true);
     }
 
-    public void refreshCustomerTable() throws SQLException {
-        List<Customer> customerList = DBUtils.getCustomerDao().queryBuilder().offset(0).limit(PAGE_SIZE).query();
-        updateCustomerTable(customerList);
+    public void refreshCustomerTable() {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                List<Customer> customerList = null;
+                try {
+                    customerList = DBUtils.getCustomerDao().queryBuilder().offset(0).limit(PAGE_SIZE).query();
+                    updateCustomerTable(customerList);
+                } catch (SQLException e) {
+                    log.error("refreshCustomerTable failed:", e);
+                } catch (Exception e) {
+                    log.error("refreshCustomerTable failed:", e);
+                }
+            }
+        });
+
     }
 }
