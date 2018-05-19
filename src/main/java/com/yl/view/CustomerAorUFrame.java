@@ -79,9 +79,6 @@ public class CustomerAorUFrame extends JFrame {
         add(namePanel);
 
         // 性别
-//        if ("男".equals(customer.getSex())) {
-//
-//        }
         if ("女".equals(customer.getSex())) {
             sexWomanRadioButton.setSelected(true);
         }else{
