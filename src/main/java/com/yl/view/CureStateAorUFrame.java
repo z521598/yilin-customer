@@ -82,7 +82,7 @@ public class CureStateAorUFrame extends JFrame {
         add(remarkPanel);
 
         datePanel.add(dateLabel);
-        dateSpinner.setValue(new Date());
+        dateSpinner.setValue(cureState.getDate());
         //设置时间格式
         JSpinner.DateEditor editor = new JSpinner.DateEditor(dateSpinner, "yyyy-MM-dd");
 
