@@ -2,6 +2,7 @@ package com.yl.view;
 
 
 import com.yl.common.db.DBUtils;
+import com.yl.common.swing.TableViewRenderer;
 import com.yl.common.utils.DataUtils;
 import com.yl.listener.CureStateMenuListener;
 import com.yl.listener.OpenAddCureStateListener;
@@ -11,9 +12,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
+import javax.swing.table.TableColumnModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -129,7 +129,7 @@ public class CureStateFrame extends JFrame {
         // 备注
         remark.setText(DataUtils.toString(customer.getRemark()));
         remarkPanel.add(remarkLabel);
-        remarkPanel.add(new JScrollPane(remark));
+        remarkPanel.add(remark);
         customerPanel.add(remarkPanel);
 
         add(customerPanel, BorderLayout.NORTH);
@@ -140,9 +140,8 @@ public class CureStateFrame extends JFrame {
                 return false;
             }
         };
-        cureStateTable.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
-        cureStateTable.setPreferredScrollableViewportSize(new Dimension(1000, 300));
-        cureStateTable.addMouseListener(new CureStateMenuListener(cureStateTable, this));
+
+        initStateTable(cureStateTable);
         cureStateJSroll = new JScrollPane(cureStateTable);
         cureStatePanel.add(cureStateJSroll, BorderLayout.CENTER);
         add(cureStatePanel, BorderLayout.CENTER);
@@ -159,15 +158,25 @@ public class CureStateFrame extends JFrame {
         setVisible(true);
     }
 
+    private void initStateTable(JTable cureStateTable) {
+        cureStateTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        cureStateTable.setPreferredScrollableViewportSize(new Dimension(1000, 300));
+        cureStateTable.addMouseListener(new CureStateMenuListener(cureStateTable, this));
+        TableColumnModel tableColumnModel = cureStateTable.getColumnModel();
+        for (int i = 0; i < CureState.columnWidths.length; i++) {
+            tableColumnModel.getColumn(i).setPreferredWidth(CureState.columnWidths[i]);
+        }
+        cureStateTable.setDefaultRenderer(Object.class, new TableViewRenderer());
+    }
+
+
     public void updateCureStateTable(List<CureState> cureStateList) {
         cureStateTable = new JTable(DataUtils.convertCureStateToArray(cureStateList), CureState.tableColumns) {
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
-        cureStateTable.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
-        cureStateTable.setPreferredScrollableViewportSize(new Dimension(1000, 300));
-        cureStateTable.addMouseListener(new CureStateMenuListener(cureStateTable, this));
+        initStateTable(cureStateTable);
         cureStateJSroll = new JScrollPane(cureStateTable);
         cureStatePanel.add(cureStateJSroll, BorderLayout.CENTER);
         cureStatePanel.setVisible(true);

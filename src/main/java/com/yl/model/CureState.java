@@ -103,9 +103,10 @@ public class CureState {
         return sb.toString();
     }
 
-    public static Object[] tableColumns = new Object[]{"id", "症状", "推拿人", "效果", "备注", "日期"};
+    public static Object[] tableColumns = new Object[]{"id", "日期", "症状", "推拿人", "效果", "备注",};
+    public static Integer[] columnWidths = {40, 80, 370, 60, 370, 300};
 
     public Object[] toArray() {
-        return new Object[]{id, symptom, people, effect, remark, dateFormat.format(date)};
+        return new Object[]{id, dateFormat.format(date), symptom, people, effect, remark};
     }
 }

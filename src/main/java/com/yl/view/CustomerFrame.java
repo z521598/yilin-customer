@@ -5,11 +5,13 @@ import com.yl.common.utils.DataUtils;
 import com.yl.common.utils.SwingUtils;
 import com.yl.listener.CustomerMenuListener;
 import com.yl.listener.QueryListener;
+import com.yl.model.CureState;
 import com.yl.model.Customer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
+import javax.swing.table.TableColumnModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -146,7 +148,8 @@ public class CustomerFrame extends JFrame {
                 return false;
             }
         };
-        customerTable.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
+        initSize(customerTable);
+        customerTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         customerTable.setPreferredScrollableViewportSize(new Dimension(1000, 600));
 
         customerTable.addMouseListener(new CustomerMenuListener(customerTable));
@@ -170,6 +173,12 @@ public class CustomerFrame extends JFrame {
                 }
             }
         });
+    }
 
+    private void initSize(JTable customerTable) {
+        TableColumnModel tableColumnModel = customerTable.getColumnModel();
+        for (int i = 0; i < Customer.columnWidths.length; i++) {
+            tableColumnModel.getColumn(i).setPreferredWidth(Customer.columnWidths[i]);
+        }
     }
 }

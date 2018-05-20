@@ -3,4 +3,5 @@
 target
 *.db
 log
-yl.log
+history
+*.log

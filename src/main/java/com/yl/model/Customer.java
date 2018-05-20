@@ -163,10 +163,10 @@ public class Customer {
         return sb.toString();
     }
 
-    public static String[] tableColumns = {"id", "姓名", "性别", "年龄", "身高(cm)", "体重(kg)", "电话", "摄入卡路里(cal)", "锻炼方法", "备注"};
-    public static Integer[] columnWidths = {5, 10, 5, 10, 10, 10, 20, 10, 20, 100};
+    public static String[] tableColumns = {"id", "姓名", "性别", "年龄", "身高(cm)", "体重(kg)", "摄入卡路里(cal)", "锻炼方法", "电话", "备注"};
+    public static Integer[] columnWidths = {40, 90, 40, 40, 60, 60, 100, 200, 100, 500};
 
     public Object[] toArray() {
-        return new Object[]{id, name, sex, age, height, weight, phoneNumber, cal, exercise, remark};
+        return new Object[]{id, name, sex, age, height, weight, cal, exercise, phoneNumber, remark};
     }
 }

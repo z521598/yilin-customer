@@ -85,6 +85,7 @@ public class CureStateAorUFrame extends JFrame {
         dateSpinner.setValue(new Date());
         //设置时间格式
         JSpinner.DateEditor editor = new JSpinner.DateEditor(dateSpinner, "yyyy-MM-dd");
+
         dateSpinner.setEditor(editor);
         dateSpinner.setBounds(34, 67, 219, 22);
         datePanel.add(dateSpinner);
