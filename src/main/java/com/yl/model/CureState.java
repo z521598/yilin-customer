@@ -24,7 +24,7 @@ public class CureState {
     @Column
     private String remark;
     @Column
-    private Date date;
+    private Date date = new Date();
 
     public CureState() {
     }
