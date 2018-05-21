@@ -166,7 +166,7 @@ public class CureStateFrame extends JFrame {
         for (int i = 0; i < CureState.columnWidths.length; i++) {
             tableColumnModel.getColumn(i).setPreferredWidth(CureState.columnWidths[i]);
         }
-        cureStateTable.setDefaultRenderer(Object.class, new TableViewRenderer());
+//        cureStateTable.setDefaultRenderer(Object.class, new TableViewRenderer());
     }
 
 
